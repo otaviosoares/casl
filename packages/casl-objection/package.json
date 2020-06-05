@@ -1,0 +1,78 @@
+{
+  "name": "@casl/objection",
+  "version": "0.0.1",
+  "description": "Allows to query accessible records from SQL databases based on CASL rules",
+  "main": "index.js",
+  "es2015": "dist/es6/index.js",
+  "typings": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stalniy/casl.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://stalniy.github.io/casl/",
+  "scripts": {
+    "prebuild": "npm run build.types",
+    "build": "BUILD_TYPES=es6,umd:cjs rollup -c ../../rollup.config.js -e @casl/ability/extra,@casl/ability,objection,knex",
+    "build.types": "rm -rf dist/types/* && tsc",
+    "lint": "eslint --ext .ts,.js src/ spec/",
+    "test": "NODE_ENV=test jest --config ../../tools/jest.config.js --env node",
+    "prerelease": "npm run lint && npm test && NODE_ENV=production npm run build",
+    "release": "semantic-release -e ../../tools/semantic-release"
+  },
+  "keywords": [
+    "access control",
+    "authorization",
+    "acl",
+    "security",
+    "permissions",
+    "rdbms",
+    "sql",
+    "postgres",
+    "mysql"
+  ],
+  "author": "Sergii Stotskyi <sergiy.stotskiy@freaksidea.com>",
+  "license": "MIT",
+  "engines": {
+    "npm": "^6.0.0"
+  },
+  "peerDependencies": {
+    "@casl/ability": "^2.0.0 || ^3.0.0 || ^4.0.0",
+    "knex": "~0.21.1",
+    "objection": "^2.1.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.0",
+    "@babel/plugin-transform-typescript": "^7.10.0",
+    "@babel/preset-env": "^7.8.4",
+    "@casl/ability": "^4.0.0",
+    "@rollup/plugin-babel": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "babel-jest": "^26.0.0",
+    "chai": "^4.1.0",
+    "chai-spies": "^1.0.0",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "jest": "^26.0.0",
+    "knex": "~0.21.1",
+    "objection": "^2.1.6",
+    "rollup": "^2.10.9",
+    "rollup-plugin-terser": "^6.1.0",
+    "semantic-release": "15.9.17",
+    "typescript": "~3.8.0"
+  },
+  "files": [
+    "dist",
+    "*.d.ts",
+    "index.js"
+  ]
+}
